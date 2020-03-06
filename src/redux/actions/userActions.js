@@ -14,8 +14,8 @@ import {
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const url = "https://calm-anchorage-14244.herokuapp.com";
-// const url = "http://localhost:3400";
+// const url = "https://calm-anchorage-14244.herokuapp.com";
+const url = "http://localhost:3400";
 
 export const loginUser = (data, history) => dispatch => {
   dispatch({ type: LOADING_UI });
@@ -232,7 +232,7 @@ export const loginCC = (data, history) => dispatch => {
 export const loginAccountant = (data, history) => dispatch => {
   dispatch({ type: LOADING_UI });
   axios
-    .post(`${url}/admin/accountlogin`, data)
+    .post(`${url}/admin/acctlogin`, data)
     .then(res => {
       console.log(res);
       setAuthorizationHeader(res.data.data);
@@ -262,7 +262,7 @@ export const loginAccountant = (data, history) => dispatch => {
 export const signUpAccountant = (data, history) => dispatch => {
   dispatch({ type: LOADING_UI });
   axios
-    .post(`${url}/admin/account`, data)
+    .post(`${url}/admin/createAcct`, data)
     .then(res => {
       console.log(res);
       setAuthorizationHeader(res.data.data);
@@ -320,6 +320,33 @@ export const getCC = history => dispatch => {
   dispatch({ type: LOADING_USER });
   axios
     .get(`https://calm-anchorage-14244.herokuapp.com/admin/ccAuth`)
+    .then(res => {
+      console.log("got here", res);
+      dispatch({
+        type: SET_USER,
+        payload: res.data
+      });
+    })
+    .catch(err => {
+      if (err.message == "Network Error") {
+        dispatch({
+          type: SET_ERRORS,
+          payload: err.message
+        });
+        return alert("There is a very Poor Network");
+      }
+      console.log(err);
+      dispatch({
+        type: SET_ERRORS,
+        payload: err
+      });
+    });
+};
+
+export const getAcct = history => dispatch => {
+  dispatch({ type: LOADING_USER });
+  axios
+    .get(`http://localhost:3400/admin/acctAuth`)
     .then(res => {
       console.log("got here", res);
       dispatch({

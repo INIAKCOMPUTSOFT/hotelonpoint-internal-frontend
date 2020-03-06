@@ -17,7 +17,7 @@ export default class AccountantBooking extends Component {
   async componentDidMount() {
     try {
       const response = await axios.get(
-        `https://calm-anchorage-14244.herokuapp.com/admin/ccgetAllHotels`
+        `http://localhost:3400/admin/acctgetAllHotels`
       );
       // console.log("bookingsss", response);
       this.setState({

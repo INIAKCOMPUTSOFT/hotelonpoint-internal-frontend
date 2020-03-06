@@ -42,7 +42,7 @@ class AccountantSignUp extends React.Component {
       email: this.state.email,
       password: this.state.password,
       confirmPassword: this.state.confirmPassword,
-      isAccount: this.state.isAccount
+      isAcct: this.state.isAccount
     };
 
     this.props.signUpAccountant(data, history);

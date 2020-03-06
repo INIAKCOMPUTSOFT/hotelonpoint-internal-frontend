@@ -23,7 +23,8 @@ import {
   logoutUser,
   getUser,
   getAdmin,
-  getCC
+  getCC,
+  getAcct
 } from "./redux/actions/userActions";
 import store from "./redux/store";
 
@@ -43,6 +44,7 @@ function App() {
   const token = localStorage.JWT_TOKEN;
   if (token) {
     const decodedToken = jwtDecode(token);
+    console.log(decodedToken)
 
     if (decodedToken.exp * 1000 < new Date()) {
       store.dispatch(logoutUser());
@@ -53,6 +55,8 @@ function App() {
         store.dispatch(getAdmin());
       } else if (decodedToken.isCC) {
         store.dispatch(getCC());
+      }else if (decodedToken.isAcct) {
+        store.dispatch(getAcct());
       } else {
         store.dispatch(getUser());
       }
