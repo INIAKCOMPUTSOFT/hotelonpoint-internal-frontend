@@ -13,7 +13,7 @@ export default class SingleHotelInvoice extends Component {
   async componentDidMount () {
     try {
       const response = await Axios.get(
-        `http://localhost:3400/Booking/hotelbooking/${this.props.match.params.id}`
+        `https://calm-anchorage-14244.herokuapp.com/Booking/hotelbooking/${this.props.match.params.id}`
       )
       console.log('1234', response)
       this.setState({
@@ -36,7 +36,7 @@ export default class SingleHotelInvoice extends Component {
         }
       ]
       const response = await Axios.put(
-        `http://localhost:3400/Booking/acct/${id}`, data
+        `https://calm-anchorage-14244.herokuapp.com/Booking/acct/${id}`, data
       )
       this.setState({
         loading: false
